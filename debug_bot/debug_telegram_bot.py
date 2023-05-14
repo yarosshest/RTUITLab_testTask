@@ -3,10 +3,9 @@ import emoji
 from telebot import TeleBot
 from telebot import types
 import re
-
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
-
 from database.async_db import asyncHandler
+from database.db_init import db_init
 
 bot = TeleBot('6269654129:AAHAw3qqV6dJsEB5woAqaKlMzceOUxUikOo')
 
@@ -109,6 +108,8 @@ def handle_query(call: types.CallbackQuery):
 
 
 def bot_main():
+    db_init()
+    print("bot start")
     bot.infinity_polling()
 
 

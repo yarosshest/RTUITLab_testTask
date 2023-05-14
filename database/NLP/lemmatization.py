@@ -15,8 +15,8 @@ def fast_lem(texts: list[str]) -> list[str]:
 
 
 def lemmatize_many(texts: list[str]) -> list:
-    stopw = stopwords.words('russian')
     download('stopwords')
+    stopw = stopwords.words('russian')
     signs = ['.', ',', '"', "'", '?', '!', ':', ';', '(', ')', '[', ']', '{', '}', '«', '»', '№']
     stopw.extend(signs)
 

@@ -3,6 +3,7 @@ from fastapi import Cookie, FastAPI, Response
 from database.async_db import asyncHandler as DB
 from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel
+from database.db_init import db_init
 
 app = FastAPI()
 
@@ -96,6 +97,7 @@ async def rate(prod_id: int, user_rate: bool):
 
 
 def api_main():
+    db_init()
     uvicorn.run(app, host="0.0.0.0", port=8031)
 
 
