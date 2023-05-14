@@ -17,8 +17,8 @@ from random import choice
 from sklearn.preprocessing import MultiLabelBinarizer
 
 from database.recomindation_alg import get_cat_recommed
-from database.Db_objects import Product, Attribute, Distance, Base, BDCONNECTION, Vector, Rate, User, Lemma
-
+from database.Db_objects import Product, Attribute, Distance, Base, Vector, Rate, User, Lemma
+from conf import BDCONNECTION
 
 def async_to_tread(fun):
     def wrapper(*args, **kwargs):
@@ -432,6 +432,3 @@ class asyncHandler:
 if __name__ == "__main__":
     tracemalloc.start()
     asyncio.run(asyncHandler.init_db())
-    print("done")
-    vec_1 = asyncio.run(asyncHandler.get_cat_data_by_id(48))
-    vec_2 = asyncio.run(asyncHandler.get_vector_by_p_id(48))

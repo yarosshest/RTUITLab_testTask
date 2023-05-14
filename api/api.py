@@ -95,5 +95,9 @@ async def rate(prod_id: int, user_rate: bool):
     return {"message": "ok"}
 
 
-if __name__ == "__main__":
+def api_main():
     uvicorn.run(app, host="0.0.0.0", port=8031)
+
+
+if __name__ == "__main__":
+    api_main()

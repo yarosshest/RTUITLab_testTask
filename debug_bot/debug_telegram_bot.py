@@ -108,5 +108,9 @@ def handle_query(call: types.CallbackQuery):
             bot.send_message(call.message.chat.id, "Спасибо за оценку")
 
 
-if __name__ == "__main__":
+def bot_main():
     bot.infinity_polling()
+
+
+if __name__ == "__main__":
+    bot_main()
