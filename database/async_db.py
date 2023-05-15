@@ -18,7 +18,9 @@ from sklearn.preprocessing import MultiLabelBinarizer
 
 from database.recomindation_alg import get_cat_recommed
 from database.Db_objects import Product, Attribute, Distance, Base, Vector, Rate, User, Lemma
-from conf import BDCONNECTION
+
+import database.config as config
+
 
 def async_to_tread(fun):
     def wrapper(*args, **kwargs):
@@ -33,7 +35,7 @@ def async_to_tread(fun):
 def Session(fun):
     async def wrapper(*args):
         engine = create_async_engine(
-            BDCONNECTION,
+            config.bd_connection,
             echo=False,
             poolclass=NullPool,
         )
@@ -50,9 +52,9 @@ def Session(fun):
 
 class asyncHandler:
     @staticmethod
-    async def init_db():
+    async def init_db() -> None:
         engine = create_async_engine(
-            BDCONNECTION,
+            config.bd_connection,
             echo=False,
             poolclass=NullPool,
         )
