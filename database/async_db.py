@@ -48,8 +48,6 @@ def Session(fun):
     return wrapper
 
 
-
-
 class asyncHandler:
     @staticmethod
     async def init_db() -> None:
