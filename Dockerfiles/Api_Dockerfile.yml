@@ -5,5 +5,4 @@ ADD requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 COPY /database /api/database
 COPY /api /api/api
-ADD conf.py conf.py
 CMD ["python", "-m", "api.api"]

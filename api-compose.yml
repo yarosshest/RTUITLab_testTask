@@ -1,8 +1,10 @@
 version: "3.9"
 services:
-  bot:
+  api:
     build:
       dockerfile: "./Dockerfiles/Api_Dockerfile.yml"
+    ports:
+      - "60106:8031"
 #    restart: always
   postgres:
     image: postgres

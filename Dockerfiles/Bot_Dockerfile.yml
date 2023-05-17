@@ -5,5 +5,4 @@ ADD requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 COPY /database /bot/database
 COPY /debug_bot /bot/debug_bot
-ADD conf.py conf.py
 CMD ["python", "-m", "debug_bot.debug_telegram_bot"]
