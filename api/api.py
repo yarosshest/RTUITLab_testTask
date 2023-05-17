@@ -115,6 +115,8 @@ async def rate(prod_id: int, user_rate: bool, user_id: int | None = Cookie(defau
 @app.get("/get recommendations",
          responses={
              404: {"model": Message, "description": "Need to login"},
+             405: {"model": Message, "description": "no positive rates"},
+             406: {"model": Message, "description": "no negative rates"},
              202: {"model": Message, "message": "ok"}
          })
 async def get_recommendations(user_id: int | None = Cookie(default=None)):
@@ -122,7 +124,13 @@ async def get_recommendations(user_id: int | None = Cookie(default=None)):
         return JSONResponse(status_code=404, content={"message": "Need to login"})
     else:
         products = await DB.get_recommend_cat(user_id)
-        return products
+
+        if products == 'no positive rates':
+            return JSONResponse(status_code=405, content={"message": "no positive rates"})
+        elif products == 'no negative rates':
+            return JSONResponse(status_code=406, content={"message": "no negative rates"})
+        else:
+            return products
 
 
 def api_main():

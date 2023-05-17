@@ -405,9 +405,13 @@ class asyncHandler:
     #     return ret
 
     @staticmethod
-    async def get_recommend_cat(user_id: int):
+    async def get_recommend_cat(user_id: int) -> list[dict] | str:
         t_id = await asyncHandler.get_user_rate_id(user_id, True)
         f_id = await asyncHandler.get_user_rate_id(user_id, False)
+        if len(t_id) == 0:
+            return 'no positive rates'
+        if len(f_id) == 0:
+            return 'no negative rates'
         all_cat = await asyncHandler.get_all_cat_data()
         print("data loaded")
         ids = await get_cat_recommed(all_cat, t_id, f_id)
