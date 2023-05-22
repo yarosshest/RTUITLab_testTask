@@ -143,8 +143,8 @@ async def get_film(prod_id: int):
 @app.get("/get_recommendations",
          responses={
              404: {"model": Message, "description": "Need to login"},
-             405: {"model": Message, "description": "no positive rates"},
-             406: {"model": Message, "description": "no negative rates"},
+             405: {"model": Message, "description": "less 2 positive rates"},
+             406: {"model": Message, "description": "less 2 negative rates"},
              202: {"model": Message, "message": "ok"}
          })
 async def get_recommendations(user_id: int | None = Cookie(default=None)):
@@ -153,10 +153,10 @@ async def get_recommendations(user_id: int | None = Cookie(default=None)):
     else:
         products = await DB.get_recommend_cat(user_id)
 
-        if products == 'no positive rates':
-            return JSONResponse(status_code=405, content={"message": "no positive rates"})
-        elif products == 'no negative rates':
-            return JSONResponse(status_code=406, content={"message": "no negative rates"})
+        if products == 'less 2 positive rates':
+            return JSONResponse(status_code=405, content={"message": "less 2 positive rates"})
+        elif products == 'less 2 negative rates':
+            return JSONResponse(status_code=406, content={"message": "less 2 negative rates"})
         else:
             return products
 
