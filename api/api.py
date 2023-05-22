@@ -112,7 +112,35 @@ async def rate(prod_id: int, user_rate: bool, user_id: int | None = Cookie(defau
         return {"message": "ok"}
 
 
-@app.get("/get recommendations",
+@app.get("/get_film",
+         responses={
+             404: {"model": Message, "description": "Film not found"},
+             202: {"model": Product, "description": "product data",
+                   "content": {
+                       "application/json": {
+                           "example": {"id": 8986,
+                                       "photo": "https://kinopoiskapiunofficial.tech/images/posters/kp/84674.jpg",
+                                       "name": "9 рота",
+                                       "description": "СССР, 1988-1989 годы, за несколько месяцев до полного вывода "
+                                                      "советских войск из Афганистана. Семеро призывников после "
+                                                      "нескольких месяцев адской подготовки в учебке под "
+                                                      "командованием беспощадного старшины попадают в горнило "
+                                                      "афганской кампании.\n\nГруппа десантников, бойцами которой "
+                                                      "стали наши герои, получает задание командования - занять "
+                                                      "высоту и держать её до прохождения колонны."}
+                       },
+                   },
+                   }
+         })
+async def get_film(prod_id: int):
+    film = await DB.get_product_by_id(prod_id)
+    if film:
+        return film
+    else:
+        return JSONResponse(status_code=404, content={"message": "Not found"})
+
+
+@app.get("/get_recommendations",
          responses={
              404: {"model": Message, "description": "Need to login"},
              405: {"model": Message, "description": "no positive rates"},
